@@ -1,12 +1,16 @@
 doctype html
 html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-    body 
-        H1 Welcome to Carla's Library 
-        p The best place to get books Recommendations
+head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Carla's Library
+body
+    h1 Welcome to Carla's Library
+    p The best place to get book recommendations
+    h2 Books Recommendations
+    ul
+        each book in bookArray
+            li= book.bookName
 
-        h2 Books Recommendations  
+
         
