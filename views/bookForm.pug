@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body 
+        h1 Add new Book 
+        
+        form(action="send" method='post')
+            label(for="author") Author
+            input(type="text" name='author' id='author' placeHolder="Write author name")  
+
+            label(for="bookName") Book Name
+            input(type='Text' name='bookName' id="bookName" placeHolder='Write the name of the Book')
+
+            select(name="type") 
+                option(value="drama") Drama
+                option(value="action") Action
+                option(value= 'non-fiction') Non-fiction 
+            
+            label(for="description") Description
+            textarea(name="description" cols="30" rows="10" id='description' placeHolder='Write a brief Description') 
+
+            button(type="submit") Add
