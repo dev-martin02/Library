@@ -8,19 +8,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "pug");
 
-app.get("/", (req, res) => {
-  getBooks()
-    .then((books) => {
-      res.render("home", { bookArray: books }); // Pass bookArray to the template
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("Error retrieving books"); // Handle errors gracefully
-    });
-});
+async function getBooks() {
+  try {
+    const book = await Book.find();
+    return book;
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+const showBook = async (req, res) => {
+  try {
+    const response = await getBooks();
+    const books = await response.map(({ bookName }) => bookName);
+    res.render("home", { bookArray: books });
+    console.log(books);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+app.get("/", showBook);
 
 app.get("/bookForm", (req, res) => {
   res.render("bookForm");
+});
+
+app.get("/deleteForm", (req, res) => {
+  res.render("deleteBook");
+  s;
 });
 
 app.post("/send", (req, res) => {
@@ -45,12 +60,5 @@ mongoose
   })
   .catch(() => console.log("fail"));
 
-async function getBooks() {
-  try {
-    const book = await Book.find();
-    // const result = book.map(({ bookName }) => console.log(bookName));
-    return book;
-  } catch (e) {
-    console.log(e.message);
-  }
-}
+// How will you delete certain book?
+// Mongoose use this approch syntax => Model.deleteOne()

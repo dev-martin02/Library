@@ -1,0 +1,11 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body 
+        form(method='delete' action='send')
+            label(for="deleteBook") Which book would you like to delete?
+            input(type="text" name='delete' id='deleteBook' placeHolder='Delete a book')
+            button(type="submit") Delete
