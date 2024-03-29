@@ -2,10 +2,12 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine", "pug");
+
 const addBookForm = require("./routes/addBookForm");
 const getBooks = require("./routes/getBooks");
 
