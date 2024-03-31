@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./style/home.css";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
-
   const url = "http://localhost:2000/";
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -17,33 +18,29 @@ export default function Home() {
     };
     getData();
   }, []);
-
-  console.log(books);
   return (
     <>
       <div id="homeHeader">
         <h1>The Carla's Library</h1>
         <nav>
-          <a href="#">Link</a>
+          <Link to={"/addBookForm"}>Add book</Link>
           <a href="#">Link</a>
           <a href="#">Link</a>
           <a href="#">Link</a>
         </nav>
       </div>
-
       <div id="body">
-        {books.length > 0 &&
-          books.map(({ author, bookName }, index) => (
-            <div className="card" key={index}>
-              <img src="" alt="book picture" />
-              <div className="card-content">
-                <p>{bookName}</p>
-                <p>By {author}</p>
-                <p>Genre: Action, Fiction </p>
-                <button>See More</button>
-              </div>
+        {books.map((book, index) => (
+          <div className="card" key={index}>
+            <img src="" alt="book picture" />
+            <div className="card-content">
+              <p>{book.bookName}</p>
+              <p>By {book.author}</p>
+              <p>Genre: Action, Fiction </p>
+              <Link to={`/bookInfo/${book._id}`}>See More</Link>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </>
   );
