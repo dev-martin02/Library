@@ -24,7 +24,7 @@ export default function Home() {
         <h1>The Carla's Library</h1>
         <nav>
           <Link to={"/addBookForm"}>Add book</Link>
-          <a href="#">Link</a>
+          <Link to={"/login"}>Login</Link>
           <a href="#">Link</a>
           <a href="#">Link</a>
         </nav>
@@ -36,7 +36,7 @@ export default function Home() {
             <div className="card-content">
               <p>{book.bookName}</p>
               <p>By {book.author}</p>
-              <p>Genre: Action, Fiction </p>
+              <p>Genre: {book.genre} </p>
               <Link to={`/bookInfo/${book._id}`}>See More</Link>
             </div>
           </div>
