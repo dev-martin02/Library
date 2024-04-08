@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import bookPic from "../public/image/atomic.jpg";
 
 export default function BookInfo() {
   const [book, setBook] = useState([]);
@@ -32,17 +33,39 @@ export default function BookInfo() {
     }
   }
   return (
-    <>
-      <div>
-        <img src="" alt="image book" />
+    // <div className="flex">
+    //   <img src="" alt="image book" />
+    //   <div>
+    //     <h2>{bookName}</h2>
+    //     <p>{`by ${author}`}</p>
+    //     <p>{`genre ${genre}`}</p>
+    //     <p>{`Description: ${description}`}</p>
+    //   </div>
+    //   <button onClick={() => deleteBook(_id)}>delete</button>
+    // </div>
+    <div className="max-w-s  bg-white shadow-md rounded-lg overflow-hidden m-4">
+      <img
+        className="w-50 block max-h-64 object-cover mx-auto"
+        src={bookPic}
+        alt="Book Cover"
+      />
+      <div className="p-4">
+        <h2 className="font-bold text-xl mb-2">{bookName}</h2>
+        <p className="text-sm text-gray-600 mb-2">By {author}</p>
+        <p className="text-sm text-gray-600 mb-2">Genre: {genre}</p>
+        <p className="text-sm text-gray-600 mb-2">
+          Description: Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+          Expedita ipsa ipsam nihil nostrum quo fuga animi asperiores, aperiam,
+          culpa eveniet mollitia tempora temporibus eum aspernatur hic autem
+          sunt incidunt et?
+        </p>
+        <button
+          onClick={() => deleteBook(_id)}
+          className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Delete Book
+        </button>
       </div>
-      <div>
-        <h2>{bookName}</h2>
-        <p>{`by ${author}`}</p>
-        <p>{`genre ${genre}`}</p>
-        <p>{`Description: ${description}`}</p>
-      </div>
-      <button onClick={() => deleteBook(_id)}>delete</button>
-    </>
+    </div>
   );
 }
