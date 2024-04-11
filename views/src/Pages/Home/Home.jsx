@@ -4,7 +4,12 @@ import bookPic from "../public/image/atomic.jpg";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const url = "http://localhost:2000/";
+  /*
+  Add a 404 page 
+  create components to increase readability  
+*/
 
   useEffect(() => {
     const getData = async () => {
@@ -12,6 +17,7 @@ export default function Home() {
         const response = await fetch(url); // corrected usage of fetch function
         const data = await response.json(); // extract JSON from the http response
         setBooks(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -22,7 +28,6 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col items-center p-3">
-        {" "}
         <h1 className="font-semiBold text-3xl">
           <span className="text-fuchsia-700">Carla's </span>
           <span className="text-blue-500 underline">Library</span>
@@ -43,38 +48,39 @@ export default function Home() {
         </nav>
       </div>
       <div id="body">
-        {books.map((book, index) => (
-          <div
-            className="flex ring-2 ring-slate-900/5 m-1 rounded-md overflow-hidden shadow-xl"
-            key={index}
-          >
-            <img
-              className="h-48 border-none"
-              src={book.image}
-              alt="book picture"
-            />
-            <div className="p-2">
-              <h2 className="font-semibold text-xl">{book.bookName}</h2>
-              <p>{`by ${book.author}`}</p>
-              <p>Genre ↓</p>
-              <ul className="flex space-x-2">
-                <li className="ring-2 rounded-md px-1">{book.genre}</li>
-              </ul>
-              <div className="flex justify-between space-x-28">
-                <div>
-                  <p>Rating</p>
-                  <p>4.5 stars</p>
+        {!loading &&
+          books.map((book, index) => (
+            <div
+              className="flex ring-2 ring-slate-900/5 m-1 rounded-md overflow-hidden shadow-xl"
+              key={index}
+            >
+              <img
+                className="h-48 border-none"
+                src={book.image}
+                alt="book picture"
+              />
+              <div className="p-2">
+                <h2 className="font-semibold text-xl">{book.bookName}</h2>
+                <p>{`by ${book.author}`}</p>
+                <p>Genre ↓</p>
+                <ul className="flex space-x-2">
+                  <li className="ring-2 rounded-md px-1">{book.genre}</li>
+                </ul>
+                <div className="flex justify-between space-x-28">
+                  <div>
+                    <p>Rating</p>
+                    <p>4.5 stars</p>
+                  </div>
+                  <Link
+                    to={`/bookInfo/${book._id}`}
+                    className=" bg-slate-400 rounded-md py-1 px-2 mt-2"
+                  >
+                    See More
+                  </Link>
                 </div>
-                <Link
-                  to={`/bookInfo/${book._id}`}
-                  className=" bg-slate-400 rounded-md py-1 px-2 mt-2"
-                >
-                  See More
-                </Link>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
         <div className="flex ring-2 ring-slate-900/5 m-1 rounded-md overflow-hidden shadow-xl">
           <img className="h-48 border-none" src={bookPic} alt="book picture" />{" "}
           <div className="p-2">

@@ -11,12 +11,13 @@ exports.showBooks = async (req, res) => {
 
 exports.addBook = (req, res, next) => {
   const response = req.body;
+  console.log(response);
   const book = new Book(response);
   book
     .save()
     .then(() => console.log("book Save it!"))
     .catch((e) => console.log(e.message));
-  res.redirect("http://localhost:3000");
+  res.status(201).json({ message: "Book saved successfully!" });
 };
 
 exports.deleteBook = async (req, res) => {
@@ -25,10 +26,11 @@ exports.deleteBook = async (req, res) => {
     if (!deletedBook) {
       return res.status(404).json({ error: "Book not found" });
     }
+
     res.status(200).json({ message: "Book deleted successfully" });
   } catch (error) {
     console.error("Error deleting book:", error);
-    res.status(500).json({ error: "Internal server error" }); // Return internal server error if something goes wrong
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

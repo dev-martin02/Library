@@ -1,10 +1,46 @@
+import { useState } from "react";
+
 export default function AddBookForm() {
-  const url = "http://localhost:2000/addBookForm";
+  /* 
+  TODO: All inputs from the form should be completed it before sending the book
+  Add a link to go back to Home page 
+  
+*/
+
+  const [sendingBook, setSendingBook] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+    setSendingBook(true); // Start loading
+
+    const formData = new FormData(event.target); // Get form data
+    const url = "http://localhost:2000/addBookForm";
+    console.log(formData);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(Object.fromEntries(formData)), // Convert FormData to JSON
+        headers: {
+          "Content-Type": "application/json", // Set Content-Type header
+        },
+      });
+      if (response.ok) {
+        console.log("Book sent successfully!");
+      } else {
+        console.error("Failed to send book.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setSendingBook(false);
+    }
+  };
 
   return (
     <>
       <h1>I'm AddBookForm</h1>
-      <form action={url} method="post" className="flex flex-col m-1 p-2">
+      <form onSubmit={handleSubmit} className="flex flex-col m-1 p-2">
         <label for="author"> Author</label>
         <input
           type="text"
@@ -44,6 +80,7 @@ export default function AddBookForm() {
           Add
         </button>
       </form>
+      {sendingBook && <p>Processing</p>}
     </>
   );
 }

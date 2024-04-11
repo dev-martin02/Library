@@ -43,7 +43,7 @@ export default function BookInfo() {
     //   </div>
     //   <button onClick={() => deleteBook(_id)}>delete</button>
     // </div>
-    <div className="max-w-s  bg-white shadow-md rounded-lg overflow-hidden m-4">
+    <div className="max-w-s   bg-white shadow-md rounded-lg overflow-hidden m-4">
       <img
         className="w-50 block max-h-64 object-cover mx-auto"
         src={bookPic}
