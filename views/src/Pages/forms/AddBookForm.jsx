@@ -1,12 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function AddBookForm() {
-  /* 
-  TODO: All inputs from the form should be completed it before sending the book
-  Add a link to go back to Home page 
-  
-*/
-
   const [sendingBook, setSendingBook] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -40,15 +35,8 @@ export default function AddBookForm() {
   return (
     <>
       <h1>I'm AddBookForm</h1>
+      <Link to={"/"}>Home</Link>
       <form onSubmit={handleSubmit} className="flex flex-col m-1 p-2">
-        <label for="author"> Author</label>
-        <input
-          type="text"
-          name="author"
-          id="author"
-          placeholder="Write author name"
-          className=" ring-2 px-1 rounded-sm"
-        />
         <label for="bookName"> Book Name </label>
         <input
           type="Text"
@@ -56,6 +44,16 @@ export default function AddBookForm() {
           id="bookName"
           placeholder="Write the name of the Book"
           className=" ring-2 px-1 rounded-sm"
+          required
+        />
+        <label for="author"> Author</label>
+        <input
+          type="text"
+          name="author"
+          id="author"
+          placeholder="Write author name"
+          className=" ring-2 px-1 rounded-sm"
+          required
         />
         <label htmlFor="genre">Genre</label>
         <select name="genre">
@@ -71,6 +69,7 @@ export default function AddBookForm() {
           id="description"
           placeholder="Write a brief Description"
           className="ring-2 px-1 rounded-sm resize-none"
+          required
         />
 
         <button

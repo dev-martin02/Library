@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 /*
   TODO: Once the delete is done, re-direct the user to the home page 
@@ -10,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function DeleteBookForm(props) {
   const { bookName, author } = props;
-  const navigate = useNavigate();
   const [deleted, setDeleted] = useState(false);
 
   const url = `http://localhost:2000/deleteBookForm/${name}`;
@@ -23,8 +21,6 @@ export default function DeleteBookForm(props) {
       });
       if (response.ok) {
         console.log("Book successfully deleted");
-        setDeleted(true);
-        navigate("/");
       }
     } catch (error) {
       console.error("Error deleting book:", error);
@@ -34,14 +30,13 @@ export default function DeleteBookForm(props) {
   return (
     <>
       <h1>I'm Delete Book Form</h1>
+      <Link to="/">Home</Link>
       <div>
         <h2>{bookName}</h2>
         <p>{author}</p>
       </div>
       <p>Would you like to delete this book?</p>
-      <form onSubmit={handleDelete}>
-        <button type="submit">Yes</button>
-      </form>
+      <form onSubmit={handleDelete}></form>
     </>
   );
 }

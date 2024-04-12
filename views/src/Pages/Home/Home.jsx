@@ -6,9 +6,10 @@ export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const url = "http://localhost:2000/";
+
   /*
   Add a 404 page 
-  create components to increase readability  
+  break down the code to littles components to increase readability  
 */
 
   useEffect(() => {

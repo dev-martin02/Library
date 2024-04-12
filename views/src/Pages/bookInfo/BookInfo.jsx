@@ -6,7 +6,6 @@ export default function BookInfo() {
   const [book, setBook] = useState([]);
   const { bookId } = useParams();
   const navigate = useNavigate();
-  console.log(bookId);
   const url = `http://localhost:2000/bookInfo/${bookId}`;
 
   useEffect(() => {
@@ -28,22 +27,16 @@ export default function BookInfo() {
       });
       const data = await response.json();
       console.log(data);
+      if (response.ok) {
+        navigate("/");
+      }
     } catch (e) {
       console.log(e.message);
     }
   }
+
   return (
-    // <div className="flex">
-    //   <img src="" alt="image book" />
-    //   <div>
-    //     <h2>{bookName}</h2>
-    //     <p>{`by ${author}`}</p>
-    //     <p>{`genre ${genre}`}</p>
-    //     <p>{`Description: ${description}`}</p>
-    //   </div>
-    //   <button onClick={() => deleteBook(_id)}>delete</button>
-    // </div>
-    <div className="max-w-s   bg-white shadow-md rounded-lg overflow-hidden m-4">
+    <div className="max-w-s bg-white shadow-md rounded-lg overflow-hidden m-4">
       <img
         className="w-50 block max-h-64 object-cover mx-auto"
         src={bookPic}
