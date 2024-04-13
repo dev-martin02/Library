@@ -5,6 +5,7 @@ import DeleteBookForm from "./Pages/forms/DeleteBookForm";
 import BookInfo from "./Pages/bookInfo/BookInfo";
 import Login from "./Pages/forms/Login";
 import SignIn from "./Pages/forms/SignIn";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signIn" element={<SignIn />} />
         {/* Add complexity to this line ↓ if book is not in db "would you like to added it?" */}
         <Route path="/bookInfo/:bookId" element={<BookInfo />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
