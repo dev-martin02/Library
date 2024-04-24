@@ -9,9 +9,8 @@ exports.showBooks = async (req, res) => {
   }
 };
 
-exports.addBook = (req, res, next) => {
+exports.addBook = (req, res) => {
   const response = req.body;
-  console.log(response);
   const book = new Book(response);
   book
     .save()
@@ -26,7 +25,6 @@ exports.deleteBook = async (req, res) => {
     if (!deletedBook) {
       return res.status(404).json({ error: "Book not found" });
     }
-
     res.status(200).json({ message: "Book deleted successfully" });
   } catch (error) {
     console.error("Error deleting book:", error);

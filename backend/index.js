@@ -14,15 +14,9 @@ app.use(
   })
 );
 
-const addBookForm = require("./routes/addBookForm");
 const getBooks = require("./routes/getBooks");
-const bookInfo = require("./routes/bookInfo");
-const deleteBook = require("./routes/deleteBook");
 
-app.use(addBookForm);
 app.use(getBooks);
-app.use(bookInfo);
-app.use(deleteBook);
 
 // DataBase Connection
 mongoose
@@ -32,3 +26,12 @@ mongoose
     app.listen(2000, () => console.log("server is running"));
   })
   .catch(() => console.log("fail"));
+
+/*
+  Understand your code, add authentication
+
+  Read this article(basic authentication) -> https://www.loginradius.com/blog/engineering/guest-post/nodejs-authentication-guide/
+
+  Add a log in/sign in Page where the user account can be store in the database
+  Fix the structure of your code, review and delete unnecessary code
+*/
