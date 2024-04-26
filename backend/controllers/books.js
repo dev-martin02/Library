@@ -10,7 +10,7 @@ exports.showBooks = async (req, res) => {
 };
 
 exports.addBook = (req, res) => {
-  const response = req.body;
+  const response = res.body;
   const book = new Book(response);
   book
     .save()

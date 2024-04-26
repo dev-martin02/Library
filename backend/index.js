@@ -15,8 +15,10 @@ app.use(
 );
 
 const getBooks = require("./routes/getBooks");
+const UserRoute = require("./routes/UserRoute");
 
 app.use(getBooks);
+app.use(UserRoute);
 
 // DataBase Connection
 mongoose
