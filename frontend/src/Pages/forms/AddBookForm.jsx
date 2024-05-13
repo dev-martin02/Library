@@ -36,7 +36,11 @@ export default function AddBookForm() {
     <>
       <h1>I'm AddBookForm</h1>
       <Link to={"/"}>Home</Link>
-      <form onSubmit={handleSubmit} className="flex flex-col m-1 p-2">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col m-1 p-2"
+        enctype="multipart/form-data"
+      >
         <label for="bookName"> Book Name </label>
         <input
           type="Text"
@@ -46,6 +50,7 @@ export default function AddBookForm() {
           className=" ring-2 px-1 rounded-sm"
           required
         />
+
         <label for="author"> Author</label>
         <input
           type="text"
@@ -55,12 +60,14 @@ export default function AddBookForm() {
           className=" ring-2 px-1 rounded-sm"
           required
         />
+
         <label htmlFor="genre">Genre</label>
         <select name="genre">
           <option value="drama">Drama</option>
           <option value="action">Action</option>
           <option value="non-fiction">Non-fiction</option>
         </select>
+
         <label htmlFor="description">Description </label>
         <textarea
           name="description"
@@ -72,6 +79,7 @@ export default function AddBookForm() {
           required
         />
 
+        {/*  Create a button component */}
         <button
           type="submit"
           className="ring-1 m-2 rounded-sm w-14 mx-auto hover:bg-sky-600 hover:text-white hover:font-semiBold"
@@ -79,6 +87,7 @@ export default function AddBookForm() {
           Add
         </button>
       </form>
+
       {sendingBook && <p>Processing</p>}
     </>
   );
