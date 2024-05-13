@@ -15,10 +15,7 @@ export default function AddBookForm() {
     try {
       const response = await fetch(url, {
         method: "POST",
-        body: JSON.stringify(Object.fromEntries(formData)), // Convert FormData to JSON
-        headers: {
-          "Content-Type": "application/json", // Set Content-Type header
-        },
+        body: formData,
       });
       if (response.ok) {
         console.log("Book sent successfully!");
@@ -36,11 +33,7 @@ export default function AddBookForm() {
     <>
       <h1>I'm AddBookForm</h1>
       <Link to={"/"}>Home</Link>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col m-1 p-2"
-        enctype="multipart/form-data"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col m-1 p-2">
         <label for="bookName"> Book Name </label>
         <input
           type="Text"
@@ -78,6 +71,7 @@ export default function AddBookForm() {
           className="ring-2 px-1 rounded-sm resize-none"
           required
         />
+        <input type="file" name="bookCover" />
 
         {/*  Create a button component */}
         <button
