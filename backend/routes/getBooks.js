@@ -6,7 +6,7 @@ const multer = require("multer");
 // each books required to contains a coverPicture
 
 const storage = multer.diskStorage({
-  destination: "./BooksPictures",
+  destination: "../frontend/public/images",
   filename: (req, file, callback) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     callback(null, uniqueSuffix + "-" + file.originalname);

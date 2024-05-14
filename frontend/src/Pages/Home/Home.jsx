@@ -9,7 +9,6 @@ export default function Home() {
   const url = "http://localhost:2000/";
 
   /*
-  Use multer to Upload pictures
   Add a 404 page 
   break down the code to littles components to increase readability  
 */
@@ -19,6 +18,7 @@ export default function Home() {
       try {
         const response = await fetch(url); // corrected usage of fetch function
         const data = await response.json(); // extract JSON from the http response
+        console.log(data);
         setBooks(data);
         setLoading(false);
       } catch (error) {
@@ -53,6 +53,7 @@ export default function Home() {
       <div id="body">
         {!loading &&
           books.map((book, index) => <AllBooks book={book} index={index} />)}
+
         <div className="flex ring-2 ring-slate-900/5 m-1 rounded-md overflow-hidden shadow-xl">
           <img className="h-48 border-none" src={bookPic} alt="book picture" />{" "}
           <div className="p-2">

@@ -10,8 +10,6 @@ export default function AddBookForm() {
 
     const formData = new FormData(event.target); // Get form data
     const url = "http://localhost:2000/addBookForm";
-    console.log(formData);
-
     try {
       const response = await fetch(url, {
         method: "POST",

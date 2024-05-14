@@ -10,11 +10,14 @@ exports.showBooks = async (req, res) => {
 };
 
 exports.addBook = (req, res) => {
-  // Add the req.file.path to the database and make the frontend use it
-  const response = req.body;
-  console.log(req.file);
-  console.log(req.body);
-  const book = new Book(response);
+  const imageName = req.file ? req.file.filename : "";
+  const book = new Book({
+    author: req.body.author,
+    bookName: req.body.bookName,
+    genre: req.body.genre,
+    description: req.body.description,
+    imageName: imageName,
+  });
   book
     .save()
     .then(() => console.log("book Save it!"))

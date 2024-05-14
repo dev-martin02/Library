@@ -5,7 +5,11 @@ export default function AllBooks({ book, index }) {
       className="flex ring-2 ring-slate-900/5 m-1 rounded-md overflow-hidden shadow-xl"
       key={index}
     >
-      <img className="h-48 border-none" src={book.image} alt="book picture" />
+      <img
+        className="h-48 border-none"
+        src={`../../../public/images/${book.imageName}`} //Why has to be in the public folder?
+        alt="book picture"
+      />
       <div className="p-2">
         <h2 className="font-semibold text-xl">{book.bookName}</h2>
         <p>{`by ${book.author}`}</p>

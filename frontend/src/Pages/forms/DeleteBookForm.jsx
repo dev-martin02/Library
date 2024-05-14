@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 /*
-  TODO: Once the delete is done, re-direct the user to the home page 
+  TODO: Once delete, re-direct the user to the home page 
     Add a link to go back to Home page 
 
 
