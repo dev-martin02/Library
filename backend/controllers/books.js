@@ -10,7 +10,7 @@ exports.showBooks = async (req, res) => {
 };
 
 exports.addBook = (req, res) => {
-  const imageName = req.file ? req.file.filename : "";
+  const imageName = req.file ? req.file.filename : ""; // How can I improve this line? Can I put a default broken Img?
   const book = new Book({
     author: req.body.author,
     bookName: req.body.bookName,

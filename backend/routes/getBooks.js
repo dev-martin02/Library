@@ -3,8 +3,6 @@ const route = express.Router();
 const booksControllers = require("../controllers/books");
 const multer = require("multer");
 
-// each books required to contains a coverPicture
-
 const storage = multer.diskStorage({
   destination: "../frontend/public/images",
   filename: (req, file, callback) => {
@@ -14,6 +12,13 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+/* 
+Try another way to implement the routers something like this
+route('/bookInfo')
+.get("/_id")
+.delete("/_id")
+*/
 
 route.post(
   "/addBookForm",
@@ -29,13 +34,6 @@ route.post("/bookImage", upload.single("bookCover"), (req, res) => {
 });
 
 route.get("/", booksControllers.showBooks);
-
-/* 
-Try another way to implement the routers something like this
-route('/bookInfo')
-.get("/_id")
-.delete("/_id")
-*/
 route.get("/bookInfo/:_id", booksControllers.findOneBook);
 route.delete("/deleteBook/:_id", booksControllers.deleteBook);
 

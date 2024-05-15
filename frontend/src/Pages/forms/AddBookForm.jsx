@@ -64,6 +64,10 @@ export default function AddBookForm() {
           className="ring-2 px-1 rounded-sm resize-none"
           required
         />
+        {/* If user don't put an image, display an alert message saying "Are you sure that this book don't have an image?"
+              yes im sure -> put a broken image 
+              no im not sure -> alert message (Please try to put an image, Thanks!)
+         */}
         <input type="file" name="bookCover" />
 
         {/*  Create a button component */}

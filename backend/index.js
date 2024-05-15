@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { default: mongoose } = require("mongoose");
+const { default: mongoose } = require("mongoose"); //What this line is doing?
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
