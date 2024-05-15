@@ -1,6 +1,10 @@
+/*
+  Task to use in this component 
+    - Improve the design od the page  
+*/
+
 export default function SignIn() {
   const url = "http://localhost:2000/signIn";
-
   const addUser = async (event) => {
     /*
       After sign up is done send him to the Login page

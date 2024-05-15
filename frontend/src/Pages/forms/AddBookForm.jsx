@@ -1,13 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function AddBookForm() {
-  const [sendingBook, setSendingBook] = useState(false);
-
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    setSendingBook(true); // Start loading
-
+    event.preventDefault();
     const formData = new FormData(event.target); // Get form data
     const url = "http://localhost:2000/addBookForm";
     try {
@@ -32,7 +27,7 @@ export default function AddBookForm() {
       <h1>I'm AddBookForm</h1>
       <Link to={"/"}>Home</Link>
       <form onSubmit={handleSubmit} className="flex flex-col m-1 p-2">
-        <label for="bookName"> Book Name </label>
+        <label htmlFor="bookName"> Book Name </label>
         <input
           type="Text"
           name="bookName"
@@ -42,7 +37,7 @@ export default function AddBookForm() {
           required
         />
 
-        <label for="author"> Author</label>
+        <label htmlFor="author"> Author</label>
         <input
           type="text"
           name="author"
@@ -79,8 +74,6 @@ export default function AddBookForm() {
           Add
         </button>
       </form>
-
-      {sendingBook && <p>Processing</p>}
     </>
   );
 }

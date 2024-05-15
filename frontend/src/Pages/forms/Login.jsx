@@ -4,7 +4,8 @@ import { useState } from "react";
 
 export default function Login() {
   /*
-  Todo: use a store to manage the state of the app, after the use login is done the page should return him to the home page saying "Hello username" 
+  Task to use in this component 
+    - Improve the design od the page  
 */
 
   const [username, setUsername] = useState("");
@@ -18,8 +19,8 @@ export default function Login() {
 
       <form
         onSubmit={async (event) => {
-          const oh = await HandleSubmitForms(event, url);
-          setUsername(oh.response[0].username);
+          const data = await HandleSubmitForms(event, url);
+          setUsername(data.response[0].username);
         }}
         className="flex flex-col m-5"
       >
