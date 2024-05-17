@@ -1,6 +1,19 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function AddBookForm() {
+  const [alertMessage, setAlertMessage] = useState(false);
+
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function okMessage() {
+    setAlertMessage(true);
+    await delay(1800);
+    setAlertMessage(false);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target); // Get form data
@@ -11,6 +24,7 @@ export default function AddBookForm() {
         body: formData,
       });
       if (response.ok) {
+        okMessage();
         console.log("Book sent successfully!");
       } else {
         console.error("Failed to send book.");
@@ -78,6 +92,16 @@ export default function AddBookForm() {
           Add
         </button>
       </form>
+
+      {alertMessage && (
+        <div className="absolute top-0 inset-x-0 flex justify-center mt-4">
+          <div className="relative h-16 w-64 bg-gray-100 p-4">
+            <div className="absolute inset-x-0 top-0 h-16 bg-blue-200 flex items-center justify-center">
+              <p className="font-semibold text-lg">Book was added!!</p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
