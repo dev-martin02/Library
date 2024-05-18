@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function BookInfo() {
   const [book, setBook] = useState([]);
@@ -19,7 +19,6 @@ export default function BookInfo() {
 
   async function deleteBook(id) {
     try {
-      console.log(id);
       const response = await fetch(`http://localhost:2000/deleteBook/${id}`, {
         method: "delete",
       });
@@ -32,7 +31,6 @@ export default function BookInfo() {
       console.log(e.message);
     }
   }
-
   const { author, bookName, description, genre, _id, imageName } = book;
 
   return (
@@ -53,6 +51,12 @@ export default function BookInfo() {
         >
           Delete Book
         </button>
+        <Link
+          to={`/updateBook/${_id}`}
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-1"
+        >
+          Update Book
+        </Link>
       </div>
     </div>
   );

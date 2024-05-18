@@ -31,8 +31,6 @@ export default function AddBookForm() {
       }
     } catch (error) {
       console.error("Error:", error);
-    } finally {
-      setSendingBook(false);
     }
   };
 

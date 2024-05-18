@@ -46,3 +46,28 @@ exports.findOneBook = async (req, res) => {
     console.log(e.message);
   }
 };
+
+exports.updateBook = async (req, res) => {
+  try {
+    console.log(req.params._id);
+    const findTheBook = await Book.findOne({ _id: req.params._id });
+    console.log(req.body);
+    const { bookName, genre, description } = req.body;
+
+    findTheBook.description = description;
+    findTheBook.bookName = bookName || findTheBook.bookName;
+    findTheBook.genre = genre || findTheBook.genre;
+
+    // Await the save operation
+    await findTheBook.save();
+
+    // Log the update success message
+    console.log(`The description of this ${findTheBook.bookName} was updated`);
+
+    // Send the updated book data as the response
+    res.status(200).send(findTheBook);
+    console.log(findTheBook);
+  } catch (error) {
+    console.log(error.message);
+  }
+};

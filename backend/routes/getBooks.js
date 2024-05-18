@@ -36,5 +36,6 @@ route.post("/bookImage", upload.single("bookCover"), (req, res) => {
 route.get("/", booksControllers.showBooks);
 route.get("/bookInfo/:_id", booksControllers.findOneBook);
 route.delete("/deleteBook/:_id", booksControllers.deleteBook);
+route.put("/updateBook/:_id", upload.none(), booksControllers.updateBook);
 
 module.exports = route;
