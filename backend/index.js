@@ -29,9 +29,7 @@ mongoose
 
 /*
   Understand your code, add authentication
-
   Read this article(basic authentication) -> https://www.loginradius.com/blog/engineering/guest-post/nodejs-authentication-guide/
-
   Add a log in/sign in Page where the user account can be store in the database
   Fix the structure of your code, review and delete unnecessary code
 */

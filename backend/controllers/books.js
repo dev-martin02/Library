@@ -4,25 +4,29 @@ exports.showBooks = async (req, res) => {
   try {
     const response = await Book.find();
     res.send(response);
-  } catch (e) {
-    console.log(e.message);
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ error: error.message });
   }
 };
 
-exports.addBook = (req, res) => {
-  const imageName = req.file ? req.file.filename : ""; // How can I improve this line? Can I put a default broken Img?
-  const book = new Book({
-    author: req.body.author,
-    bookName: req.body.bookName,
-    genre: req.body.genre,
-    description: req.body.description,
-    imageName: imageName,
-  });
-  book
-    .save()
-    .then(() => console.log("book Save it!"))
-    .catch((e) => console.log(e.message));
-  res.status(201).json({ message: "Book saved successfully!" });
+exports.addBook = async (req, res) => {
+  try {
+    const imageName = req.file ? req.file.filename : ""; // How can I improve this line? Can I put a default broken Img?
+    const book = new Book({
+      author: req.body.author,
+      bookName: req.body.bookName,
+      genre: req.body.genre,
+      description: req.body.description,
+      imageName: imageName,
+    });
+
+    await book.save();
+    res.status(201).json({ message: "Book saved successfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
 };
 
 exports.deleteBook = async (req, res) => {
@@ -42,31 +46,26 @@ exports.findOneBook = async (req, res) => {
   try {
     const response = await Book.findOne({ _id: req.params });
     res.send(response);
-  } catch (e) {
-    console.log(e.message);
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ error: error.message });
   }
 };
 
 exports.updateBook = async (req, res) => {
   try {
-    console.log(req.params._id);
-    const findTheBook = await Book.findOne({ _id: req.params._id });
-    console.log(req.body);
+    const bookFound = await Book.findOne({ _id: req.params._id });
+
     const { bookName, genre, description } = req.body;
 
-    findTheBook.description = description;
-    findTheBook.bookName = bookName || findTheBook.bookName;
-    findTheBook.genre = genre || findTheBook.genre;
+    bookFound.description = description || bookFound.description;
+    bookFound.bookName = bookName || bookFound.bookName;
+    bookFound.genre = genre || bookFound.genre;
 
-    // Await the save operation
-    await findTheBook.save();
-
-    // Log the update success message
-    console.log(`The description of this ${findTheBook.bookName} was updated`);
-
-    // Send the updated book data as the response
-    res.status(200).send(findTheBook);
-    console.log(findTheBook);
+    await bookFound.save();
+    res.status(200).json({
+      message: `The description of the book "${bookFound.bookName}" was updated`,
+    });
   } catch (error) {
     console.log(error.message);
   }

@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-// Add more properties, unique and required
-
 const bookSchema = new mongoose.Schema(
   {
     author: { type: String, require: true },

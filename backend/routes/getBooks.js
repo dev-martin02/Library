@@ -13,25 +13,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-/* 
-Try another way to implement the routers something like this
-route('/bookInfo')
-.get("/_id")
-.delete("/_id")
-*/
-
 route.post(
   "/addBookForm",
   upload.single("bookCover"),
   booksControllers.addBook
 );
-
-// eXAMPLE
-route.post("/bookImage", upload.single("bookCover"), (req, res) => {
-  console.log(req.file);
-  console.log(req.body);
-  res.send("bOOKS WAS A SUCCESS");
-});
 
 route.get("/", booksControllers.showBooks);
 route.get("/bookInfo/:_id", booksControllers.findOneBook);
