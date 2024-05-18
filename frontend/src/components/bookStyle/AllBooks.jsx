@@ -2,10 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function AllBooks({ book, index }) {
   return (
-    <div
-      className="flex flex-col md:flex-row ring-2 ring-slate-900/5 m-1 rounded-md overflow-hidden shadow-xl md:w-full p-3"
-      key={index}
-    >
+    <div className="flex flex-col md:flex-row ring-2 ring-slate-900/5 m-1 rounded-md overflow-hidden shadow-xl md:w-full p-3">
       <img
         className="h-48 w-full object-scale-down md:h-full md:w-48"
         src={`../../../public/images/${book.imageName}`} //Why has to be in the public folder?

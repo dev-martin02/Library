@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AllBooks from "../components/bookStyle/AllBooks";
+import { useBookStore } from "../../store/store";
 
 /*
     Task to do in this components
@@ -11,7 +12,10 @@ import AllBooks from "../components/bookStyle/AllBooks";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
+  const [bookContainer, setBookContainer] = useState([]);
+
   const url = "http://localhost:2000/";
+  const { listOfBooks, bookStore } = useBookStore();
 
   useEffect(() => {
     const getData = async () => {
@@ -20,12 +24,28 @@ export default function Home() {
         const data = await response.json();
 
         setBooks(data);
+        listOfBooks(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     getData();
   }, []);
+
+  function searchBook(event) {
+    const inputBarValue = event.target.value;
+    if (!inputBarValue) {
+      setBookContainer([]);
+    }
+    const result = books.filter(({ bookName }) =>
+      bookName.includes(inputBarValue)
+    );
+    setBookContainer(result);
+    console.log(result);
+    if (result.length === 0) {
+      setBookContainer(["Sorry no books"]);
+    }
+  }
 
   return (
     <>
@@ -44,11 +64,18 @@ export default function Home() {
           </Link>
         </nav>
       </div>
-
+      <input
+        type="Text"
+        placeholder="Search a Book"
+        className="ring-2 px-1 rounded-sm"
+        onChange={searchBook}
+      />
       <div id="body">
-        {books.map((book, index) => (
-          <AllBooks book={book} index={index} />
-        ))}
+        {bookContainer.length > 0
+          ? bookContainer.map((book, index) => (
+              <AllBooks key={index} book={book} />
+            ))
+          : books.map((book, index) => <AllBooks key={index} book={book} />)}
       </div>
     </>
   );

@@ -6,3 +6,9 @@
         - Store the data from one fetch, and use it in multiples files
 
 */
+import { create } from "zustand";
+
+export const useBookStore = create((set) => ({
+  bookStore: [],
+  listOfBooks: (book) => set((state) => ({ bookStore: book })),
+}));
