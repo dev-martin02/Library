@@ -49,28 +49,34 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center p-3">
+      <div className="flex items-center justify-between p-3">
         <h1 className="font-semiBold text-3xl">
           <span className="text-fuchsia-700">Carla's </span>
           <span className="text-blue-500 underline">Library</span>
         </h1>
 
-        <nav className="space-x-4">
-          <Link to={"/addBookForm"} className="hover:text-gray-300">
-            Add book
-          </Link>
-          <Link to={"/login"} className="hover:text-gray-300">
-            Login
-          </Link>
-        </nav>
+        <input
+          type="Text"
+          placeholder="Search a Book"
+          className="ring-2 px-1 rounded-sm m-2"
+          onChange={searchBook}
+        />
+
+        <p>My Books</p>
       </div>
-      <input
-        type="Text"
-        placeholder="Search a Book"
-        className="ring-2 px-1 rounded-sm"
-        onChange={searchBook}
-      />
-      <div id="body">
+      <nav className="space-x-4 flex justify-center align-middle ">
+        <Link to={"/addBookForm"} className="hover:text-gray-300">
+          Add book
+        </Link>
+        <Link to={"/login"} className="hover:text-gray-300">
+          Login
+        </Link>
+      </nav>
+
+      <div
+        id="body"
+        className="sm:grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-1 "
+      >
         {bookContainer.length > 0
           ? bookContainer.map((book, index) => (
               <AllBooks key={index} book={book} />

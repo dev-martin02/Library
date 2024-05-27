@@ -35,6 +35,8 @@ export default function UpdateBookForm() {
     <>
       <h1>What Would you like to update?</h1>
       <form onSubmit={UpdateForm}>
+        <label htmlFor="bookName">Book Title: </label>
+        <input type="text" id="bookName" name="bookName" />
         <label htmlFor="description">Description </label>
         <textarea
           name="description"
